@@ -13,7 +13,7 @@ class SettingsManager(NSObject):
         self.defaults = AppKit.NSUserDefaults.standardUserDefaults()
         return self
     
-    @objc.signature(b'B@:')
+    @objc.typedSelector(b'B@:')
     def autoStart(self):
         return self.defaults.boolForKey_('autoStart')
     
@@ -212,7 +212,7 @@ class ClipboardManager(NSObject):
         quit_item.setTarget_(self)
         self.menu.addItem_(quit_item)
     
-    @objc.signature(b'v@:@')
+    @objc.typedSelector(b'v@:@')
     def openSettings_(self, sender):
         NSLog("Opening settings window...")
         
@@ -278,12 +278,12 @@ class ClipboardManager(NSObject):
         self.settings_window.makeKeyAndOrderFront_(None)
         self.app.activateIgnoringOtherApps_(True)
     
-    @objc.signature(b'v@:@')
+    @objc.typedSelector(b'v@:@')
     def windowWillClose_(self, notification):
         NSLog("Window is closing")  # 添加日志
         self.settings_window = None
     
-    @objc.signature(b'v@:@')
+    @objc.typedSelector(b'v@:@')
     def toggleAutoStart_(self, sender):
         is_on = sender.state() == AppKit.NSOnState
         self.settings_manager.setAutoStart_(is_on)
@@ -410,7 +410,7 @@ class ClipboardManager(NSObject):
             NSLog(f"Error loading history: {str(e)}")
             self.history = []
 
-    @objc.signature(b'v@:@')
+    @objc.typedSelector(b'v@:@')
     def deleteItem_(self, sender):
         item = sender.representedObject()
         if item in self.history:
@@ -418,13 +418,13 @@ class ClipboardManager(NSObject):
             self.update_menu()
             self.save_history()
 
-    @objc.signature(b'v@:@')
+    @objc.typedSelector(b'v@:@')
     def clearAllItems_(self, sender):
         self.history.clear()
         self.update_menu()
         self.save_history()
 
-    @objc.signature(b'B@:@@')
+    @objc.typedSelector(b'B@:@@')
     def control_textShouldEndEditing_(self, control, fieldEditor):
         if control == self.max_count_field:
             try:
