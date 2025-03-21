@@ -15,14 +15,23 @@ OPTIONS = {
         'LSMinimumSystemVersion': '10.10',
         'NSHighResolutionCapable': True,
     },
-    'packages': ['AppKit', 'Foundation', 'objc', 'ServiceManagement'],
-    'includes': ['AppKit', 'Foundation', 'objc', 'ServiceManagement'],
+    'packages': [
+        'AppKit', 
+        'Foundation', 
+        'objc', 
+        'ServiceManagement',
+    ],
+    'includes': [
+        'AppKit', 
+        'Foundation', 
+        'objc', 
+        'ServiceManagement',
+    ],
     'resources': [],
     'strip': False,  # 禁用 strip 以保留调试信息
-    'arch': 'arm64',
-    'semi_standalone': True,  # 使用系统 Python 框架
+    'arch': None,  # 让 py2app 自动检测架构
+    'semi_standalone': False,  # 改为 False
     'site_packages': True,
-    'optimize': 0,  # 禁用优化以便调试
 }
 
 setup(
